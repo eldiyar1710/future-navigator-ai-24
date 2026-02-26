@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut, LayoutDashboard } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
@@ -17,6 +18,7 @@ interface HeaderProps {
 const Header = ({ transparent = false }: HeaderProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
   return (
     <motion.header
@@ -29,12 +31,10 @@ const Header = ({ transparent = false }: HeaderProps) => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Logo */}
         <Link to="/" className="flex items-center group">
           <img src={logo} alt="AcademicApply" className="h-10 w-auto object-contain group-hover:scale-105 transition-transform mix-blend-multiply dark:mix-blend-screen" />
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.href;
@@ -58,17 +58,42 @@ const Header = ({ transparent = false }: HeaderProps) => {
           })}
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-3">
-          <Link
-            to="/assessment?type=school"
-            className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg"
-          >
-            Начать
-          </Link>
+        <div className="hidden md:flex items-center gap-2">
+          {user ? (
+            <>
+              <Link
+                to="/dashboard"
+                className="px-4 py-2 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300 flex items-center gap-2"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                Кабинет
+              </Link>
+              <button
+                onClick={signOut}
+                className="px-4 py-2 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300 flex items-center gap-2"
+              >
+                <LogOut className="w-4 h-4" />
+                Выйти
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/auth"
+                className="px-4 py-2 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-300"
+              >
+                Войти
+              </Link>
+              <Link
+                to="/assessment?type=school"
+                className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg"
+              >
+                Начать
+              </Link>
+            </>
+          )}
         </div>
 
-        {/* Mobile menu toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className={`md:hidden p-2 rounded-lg ${transparent ? "text-primary-foreground" : "text-foreground"}`}
@@ -77,7 +102,6 @@ const Header = ({ transparent = false }: HeaderProps) => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -94,13 +118,40 @@ const Header = ({ transparent = false }: HeaderProps) => {
               {link.label}
             </Link>
           ))}
-          <Link
-            to="/assessment?type=school"
-            onClick={() => setMobileOpen(false)}
-            className="block px-4 py-3 rounded-2xl bg-primary text-primary-foreground text-sm font-semibold text-center shadow-md"
-          >
-            Начать
-          </Link>
+          {user ? (
+            <>
+              <Link
+                to="/dashboard"
+                onClick={() => setMobileOpen(false)}
+                className="block px-4 py-3 rounded-2xl text-sm font-medium text-foreground hover:bg-muted transition-all duration-300"
+              >
+                🏠 Кабинет
+              </Link>
+              <button
+                onClick={() => { signOut(); setMobileOpen(false); }}
+                className="block w-full text-left px-4 py-3 rounded-2xl text-sm font-medium text-destructive hover:bg-destructive/10 transition-all duration-300"
+              >
+                Выйти
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/auth"
+                onClick={() => setMobileOpen(false)}
+                className="block px-4 py-3 rounded-2xl text-sm font-medium text-foreground hover:bg-muted transition-all duration-300"
+              >
+                Войти
+              </Link>
+              <Link
+                to="/assessment?type=school"
+                onClick={() => setMobileOpen(false)}
+                className="block px-4 py-3 rounded-2xl bg-primary text-primary-foreground text-sm font-semibold text-center shadow-md"
+              >
+                Начать
+              </Link>
+            </>
+          )}
         </motion.div>
       )}
     </motion.header>
