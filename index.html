@@ -1,30 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EduPath — AI-платформа для выбора профессии и университета</title>
-    <meta name="description" content="Определи своё будущее с помощью AI. Подбор профессии, университета и помощь с поступлением." />
-    <meta name="author" content="EduPath" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Navigator AI - Платформа для выбора университета</title>
+    <meta name="description" content="Определи своё будущее с помощью AI. Подбор профессии, университета и помощь с поступлением.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 60px 20px; color: white; }
+        h1 { font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .subtitle { font-size: 1.3em; margin-bottom: 30px; opacity: 0.9; }
+        .card { background: rgba(255,255,255,0.95); padding: 30px; border-radius: 15px; margin: 20px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 40px 0; }
+        .feature { text-align: center; }
+        .icon { font-size: 3em; margin-bottom: 15px; }
+        .btn { display: inline-block; background: #ff6b6b; color: white; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; margin: 10px; transition: transform 0.3s; }
+        .btn:hover { transform: scale(1.05); }
+        footer { text-align: center; padding: 40px; color: white; opacity: 0.8; }
+        @media (max-width: 768px) { h1 { font-size: 2em; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎓 Future Navigator AI</h1>
+            <p class="subtitle">Определи своё будущее с помощью искусственного интеллекта</p>
+        </div>
+    </header>
 
-    <meta property="og:title" content="EduPath — AI-платформа для вашего будущего" />
-    <meta property="og:description" content="Определи навыки, найди профессию и поступи в лучший университет" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <main class="container">
+        <div class="card">
+            <h2 style="text-align: center; margin-bottom: 30px;">Наши функции</h2>
+            <div class="grid">
+                <div class="feature">
+                    <div class="icon">🤖</div>
+                    <h3>AI-Анализ</h3>
+                    <p>Подбор специальности по навыкам и интересам</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">🎯</div>
+                    <h3>Университеты</h3>
+                    <p>Рекомендации с высоким шансом поступления</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">📚</div>
+                    <h3>Подготовка</h3>
+                    <p>Бесплатные курсы для подготовки к экзаменам</p>
+                </div>
+            </div>
+        </div>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    <script type="module" crossorigin src="/assets/index-B5UbhHR_.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-C7QExgkH.css">
-  </head>
+        <div class="card">
+            <h2 style="text-align: center; margin-bottom: 30px;">🌍 Популярные направления</h2>
+            <div class="grid">
+                <div class="feature">
+                    <h3>🇰🇿 Казахстан</h3>
+                    <p>Назарбаев Университет<br>Полные гранты</p>
+                </div>
+                <div class="feature">
+                    <h3>🇰🇷 Южная Корея</h3>
+                    <p>KAIST<br>Топ-40 мира</p>
+                </div>
+                <div class="feature">
+                    <h3>🇩🇪 Германия</h3>
+                    <p>TU Munich<br>Низкая стоимость</p>
+                </div>
+                <div class="feature">
+                    <h3>🇵🇱 Польша</h3>
+                    <p>Варшавский университет<br>Доступно</p>
+                </div>
+            </div>
+        </div>
 
-  <body>
-    <div id="root"></div>
-    <script>
-      // Временное решение для GitHub Pages
-      window.SUPABASE_URL = 'https://okmlnevwslwtlinsxvor.supabase.co';
-      window.SUPABASE_PUBLISHABLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9rbWxuZXZ3c2x3dGxpbnN4dm9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMDI3ODYsImV4cCI6MjA4NzY3ODc4Nn0.cx-9HnrtoWtqgEaNFJJYp9APUrFr5qQit7Ho2rRP6ZY';
-    </script>
-  </body>
+        <div style="text-align: center; padding: 40px;">
+            <h2 style="color: white; margin-bottom: 20px;">Готов начать?</h2>
+            <a href="#" class="btn">Начать тестирование</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Future Navigator AI. Все права защищены.</p>
+    </footer>
+</body>
 </html>
