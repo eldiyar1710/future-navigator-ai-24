@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import DocumentUpload from "@/components/DocumentUpload";
 
 type Application = {
   id: string;
@@ -164,6 +165,19 @@ const Tracking = () => {
               })}
             </div>
           )}
+
+          {/* Documents section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-10"
+          >
+            <h2 className="text-2xl font-heading font-bold text-foreground mb-4">
+              Документы
+            </h2>
+            <DocumentUpload />
+          </motion.div>
         </div>
       </div>
 
