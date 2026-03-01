@@ -110,6 +110,125 @@ export type Database = {
           },
         ]
       }
+      event_registrations: {
+        Row: {
+          answers: Json | null
+          created_at: string
+          email: string
+          event_id: string
+          first_name: string
+          id: string
+          last_name: string | null
+          phone: string | null
+          user_id: string | null
+        }
+        Insert: {
+          answers?: Json | null
+          created_at?: string
+          email: string
+          event_id: string
+          first_name: string
+          id?: string
+          last_name?: string | null
+          phone?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          answers?: Json | null
+          created_at?: string
+          email?: string
+          event_id?: string
+          first_name?: string
+          id?: string
+          last_name?: string | null
+          phone?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_registrations_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          consultant_id: string
+          created_at: string
+          custom_questions: Json | null
+          description: string | null
+          event_date: string | null
+          id: string
+          is_active: boolean
+          location: string | null
+          promo_code: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          consultant_id: string
+          created_at?: string
+          custom_questions?: Json | null
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          is_active?: boolean
+          location?: string | null
+          promo_code?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          consultant_id?: string
+          created_at?: string
+          custom_questions?: Json | null
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          is_active?: boolean
+          location?: string | null
+          promo_code?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      invitations: {
+        Row: {
+          accepted_at: string | null
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+          invited_by: string
+          role: Database["public"]["Enums"]["app_role"]
+          token: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          created_at?: string
+          email: string
+          expires_at?: string
+          id?: string
+          invited_by: string
+          role?: Database["public"]["Enums"]["app_role"]
+          token?: string
+        }
+        Update: {
+          accepted_at?: string | null
+          created_at?: string
+          email?: string
+          expires_at?: string
+          id?: string
+          invited_by?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          token?: string
+        }
+        Relationships: []
+      }
       organisations: {
         Row: {
           city: string | null

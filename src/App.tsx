@@ -14,6 +14,9 @@ import Courses from "./pages/Courses";
 import Tracking from "./pages/Tracking";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import ConsultantEvents from "./pages/ConsultantEvents";
+import EventRegister from "./pages/EventRegister";
+import AdminInvite from "./pages/AdminInvite";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,11 +37,28 @@ const App = () => (
             <Route path="/apply/:id" element={<Apply />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/tracking" element={<Tracking />} />
+            <Route path="/event/:eventId" element={<EventRegister />} />
             <Route
               path="/dashboard"
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/events"
+              element={
+                <ProtectedRoute requiredRole="consultant">
+                  <ConsultantEvents />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/invites"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <AdminInvite />
                 </ProtectedRoute>
               }
             />

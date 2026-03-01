@@ -11,15 +11,18 @@ import Header from "@/components/Header";
 import { Mail, Lock, User, ArrowRight } from "lucide-react";
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState("");
+  const [searchParams] = useSearchParams();
+  const inviteEmail = searchParams.get("email");
+  const inviteToken = searchParams.get("invite");
+
+  const [isLogin, setIsLogin] = useState(!inviteToken);
+  const [email, setEmail] = useState(inviteEmail || "");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
