@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import { motion } from "framer-motion";
-import { GraduationCap, Target, FileText, Calendar, User, TrendingUp } from "lucide-react";
+import { GraduationCap, Target, FileText, Calendar, User, TrendingUp, QrCode, UserPlus } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
 const Dashboard = () => {
@@ -102,11 +103,58 @@ const Dashboard = () => {
           ))}
         </div>
 
+        {/* Role-specific actions */}
+        {roles.includes("consultant") && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="bg-card rounded-3xl border border-border/50 p-6 shadow-card mb-6"
+          >
+            <h2 className="text-lg font-heading font-bold text-foreground mb-4 flex items-center gap-2">
+              <QrCode className="w-5 h-5 text-primary" />
+              Инструменты эксперта
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <Link to="/events" className="flex items-center gap-3 p-4 rounded-2xl bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors">
+                <QrCode className="w-5 h-5 text-primary" />
+                <div>
+                  <p className="font-semibold text-foreground">Мероприятия</p>
+                  <p className="text-xs text-muted-foreground">QR-коды и сбор лидов</p>
+                </div>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+
+        {roles.includes("admin") && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="bg-card rounded-3xl border border-border/50 p-6 shadow-card mb-6"
+          >
+            <h2 className="text-lg font-heading font-bold text-foreground mb-4 flex items-center gap-2">
+              <UserPlus className="w-5 h-5 text-primary" />
+              Администрирование
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <Link to="/admin/invites" className="flex items-center gap-3 p-4 rounded-2xl bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors">
+                <UserPlus className="w-5 h-5 text-primary" />
+                <div>
+                  <p className="font-semibold text-foreground">Приглашения</p>
+                  <p className="text-xs text-muted-foreground">Пригласить экспертов</p>
+                </div>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+
         {/* Quick Actions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.6 }}
           className="bg-card rounded-3xl border border-border/50 p-6 shadow-card"
         >
           <h2 className="text-lg font-heading font-bold text-foreground mb-4 flex items-center gap-2">
